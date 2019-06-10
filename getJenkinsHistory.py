@@ -46,6 +46,6 @@ if __name__ == '__main__':
     except:
         lf.write(format_exc())
         lf.write('\n')
-    finaly:
+    finally:
         lf.flush()
         lf.close()
