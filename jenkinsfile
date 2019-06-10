@@ -19,7 +19,7 @@ node {
 	stage('Test image') {
 		/*Testing app image*/
 		app.inside{
-			sh 'echo "/usr/local/bin/getJenkinsHistory.py"'
+			sh '/usr/local/bin/getJenkinsHistory.py'
 		}
 	}
 }
