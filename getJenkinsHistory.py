@@ -42,7 +42,7 @@ if __name__ == '__main__':
         username = 'kasema'#os.environ['JENKINS_USERNAME']
         password = 'admin'#os.environ['JENKINS_PASSWORD']
         jenkins_url = "http://18.222.147.201:8080"#os.environ['JENKINS_URL']
-       # tags = ''#os.environ['TAGS']
+        tags = os.environ['BUILD_TAG']
         getSCMInfroFromLatestGoodBuild(jenkins_url, job_name, tags, username, password)
     except:
         lf.write(format_exc())
