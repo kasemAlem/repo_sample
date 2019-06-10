@@ -19,7 +19,10 @@ node {
 	stage('Test image') {
 		/*Testing app image*/
 		app.inside{
-			sh '/usr/local/bin/getJenkinsHistory.py'
+			sh '/usr/local/bin/getJenkinsHistory.py > /home/ec2-user/workspace/piplineJob/mylog.log'
 		}
+	}
+	stage('GET output') {
+		sh 'cat /home/ec2-user/workspace/piplineJob/mylog.log'
 	}
 }
