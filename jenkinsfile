@@ -4,6 +4,7 @@ node {
 	stage('CleanWorkspace') {
 		steps {
 			cleanWs()
+		}
 	}
 
 	stage ("Clone the repo") {
