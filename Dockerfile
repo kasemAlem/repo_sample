@@ -4,8 +4,7 @@ WORKDIR /tmp
 USER root
 
 RUN yum update -y 
-#RUN yum install -y  python2-pip
-RUN pip install jenkinsapi
+RUN /bin/bash -c 'pip install jenkinsapi'
 
 ADD getJenkinsHistory.py /usr/local/bin/getJenkinsHistory.py
 
