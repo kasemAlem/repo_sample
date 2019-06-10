@@ -19,11 +19,11 @@ def getSCMInfroFromLatestGoodBuild(url, jobName, tags, username=None, password=N
     specific_url = url_get_all_builds.format(jobName)
     j = Jenkins(url, username, password)
     job = j[jobName]
-    #lgb = job.get_last_good_build()
+    lgb = job.get_last_good_build()
     last_build_number = job.get_last_buildnumber()
     last_build_tag = tags[-1]
 
-    new_tag = (int(''.join(last_build_tag.split('.'))) + 1)
+    #new_tag = (int(''.join(last_build_tag.split('.'))) + 1)
     if not last_build_number:
         return
     for i in range(last_build_number, 0, -1):
@@ -42,7 +42,7 @@ if __name__ == '__main__':
         username = 'kasema'#os.environ['JENKINS_USERNAME']
         password = 'admin'#os.environ['JENKINS_PASSWORD']
         jenkins_url = "http://18.222.147.201:8080"#os.environ['JENKINS_URL']
-        tags = ''#os.environ['TAGS']
+       # tags = ''#os.environ['TAGS']
         getSCMInfroFromLatestGoodBuild(jenkins_url, job_name, tags, username, password)
     except:
         lf.write(format_exc())
