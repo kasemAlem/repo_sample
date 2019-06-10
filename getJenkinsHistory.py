@@ -2,10 +2,12 @@
 
 from jenkinsapi.jenkins import Jenkins
 import os
+from traceback impor format_exc
 
 url_get_all_builds = "http://18.222.147.201:8080//job/{}/api/json?tree=allBuilds[*]&depth=2"
 version_base = "1.0.0"
 
+lf = open('/home/ec2-user/workspace/piplineJob/logfile.log', 'w')
 
 def get_server_instance():
 
@@ -33,10 +35,17 @@ def getSCMInfroFromLatestGoodBuild(url, jobName, tags, username=None, password=N
 
 
 if __name__ == '__main__':
-    #job_name = 'testing'
-    job_name = 'testing'#os.environ['JOB_NAME']
-    username = 'kasema'#os.environ['JENKINS_USERNAME']
-    password = 'admin'#os.environ['JENKINS_PASSWORD']
-    jenkins_url = "http://18.222.147.201:8080"#os.environ['JENKINS_URL']
-    tags = ''#os.environ['TAGS']
-    getSCMInfroFromLatestGoodBuild(jenkins_url, job_name, tags, username, password)
+    try:
+        #job_name = 'testing'
+        job_name = 'testing'#os.environ['JOB_NAME']
+        username = 'kasema'#os.environ['JENKINS_USERNAME']
+        password = 'admin'#os.environ['JENKINS_PASSWORD']
+        jenkins_url = "http://18.222.147.201:8080"#os.environ['JENKINS_URL']
+        tags = ''#os.environ['TAGS']
+        getSCMInfroFromLatestGoodBuild(jenkins_url, job_name, tags, username, password)
+    except:
+        lf.write(format_exc())
+        lf.write('\n')
+    finaly:
+        lf.flush()
+        lf.close()
