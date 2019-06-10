@@ -1,5 +1,4 @@
-pipeline {
-	gent { node { label 'job' } }
+node {
 	def app
 
 	environment {
