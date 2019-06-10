@@ -2,7 +2,7 @@
 
 from jenkinsapi.jenkins import Jenkins
 import os
-from traceback impor format_exc
+from traceback import format_exc
 
 url_get_all_builds = "http://18.222.147.201:8080//job/{}/api/json?tree=allBuilds[*]&depth=2"
 version_base = "1.0.0"
