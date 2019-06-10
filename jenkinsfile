@@ -2,9 +2,7 @@ node {
 	def app
 
 	stage('CleanWorkspace') {
-		steps {
-			cleanWs()
-		}
+		cleanWs()
 	}
 
 	stage ("Clone the repo") {
