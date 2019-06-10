@@ -23,6 +23,6 @@ node {
 		}
 	}
 	stage('Push new tag') {
-		sh 'NEW_TAG=`git tag -l | tail -n 1 | awk -F \'.\' \'{if ($3<9) {$3+=1} else {if ($2<9) {$3=0; $2+=1} else {$3=0;$2=0;$1+=1}}; printf "%s.%s.%s", $1, $2, $3}\'; git tag -a -f ${NEW_TAG} HEAD -m "${NEW_TAG}"; git push origin ${NEW_TAG}'
+		sh 'NEW_TAG=`git tag -l | tail -n 1 | awk -F \'.\' \'{if ($3<9) {$3+=1} else {if ($2<9) {$3=0; $2+=1} else {$3=0;$2=0;$1+=1}}; printf "%s.%s.%s", $1, $2, $3}\'`; git tag -a -f ${NEW_TAG} HEAD -m "${NEW_TAG}"; git push origin ${NEW_TAG}'
 	}
 }
