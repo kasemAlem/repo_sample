@@ -1,7 +1,7 @@
 node {
 	def app
 
-	stage {
+	stage ("Clone the repo") {
 		checkout scm
 	}
 	environment {
