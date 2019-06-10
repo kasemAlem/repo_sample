@@ -1,12 +1,10 @@
 FROM centos/python-27-centos7
 
-RUN yum update -y 
-
-
-ADD getJenkinsHistory.py /usr/local/bin/getJenkinsHistory.py
-
-
 WORKDIR /tmp
 USER root
+
+RUN yum update -y 
+
+ADD getJenkinsHistory.py /usr/local/bin/getJenkinsHistory.py
 
 ENTRYPOINT ["/usr/local/bin/getJenkinsHistory.py"]
