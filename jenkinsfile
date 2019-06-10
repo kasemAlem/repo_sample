@@ -1,6 +1,11 @@
 node {
 	def app
 
+	stage('CleanWorkspace') {
+		steps {
+			cleanWs()
+	}
+
 	stage ("Clone the repo") {
 		checkout scm
 	}
