@@ -6,7 +6,7 @@ node {
 	}
 	stage('Build image') {
 		/* This builds docker image from commandline*/ 
-		app = docker.build("myapp.${NEW_TAG}")
+		app = docker.build("myapp."params.NEW_TAG)
 	}
 	stage('Test image') {
 		/*Testing app image*/
