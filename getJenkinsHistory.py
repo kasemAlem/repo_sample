@@ -1,3 +1,5 @@
+#!/bin/python2.7
+
 from jenkinsapi.jenkins import Jenkins
 import os
 
