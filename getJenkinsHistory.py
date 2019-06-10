@@ -30,7 +30,7 @@ def getSCMInfroFromLatestGoodBuild(url, jobName, tags, username=None, password=N
         try:
             build = job.get_build(i)
             print build.get_timestamp()
-            lf.write(build.get_timestamp())
+            lf.write(type(build.get_timestamp()))
             lf.write('\n')
         except KeyError:
             break
