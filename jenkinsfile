@@ -33,9 +33,9 @@ node {
 	stage('Post build') {
 		echo 'Always running this...'
 
-		emailext body: sh('echo "${currentBuild.currentResult}: Job ${JOB_NAME} build ${BUILD_NUMBER}\n More info at: ${BUILD_URL}"'),
+		emailext body: sh('echo "${DEFAULT_CONTENT}"'),
 		recipientProviders: [['kasem.alem@gmail.com']],
-		subject: sh('echo "Jenkins Build ${currentBuild.currentResult}: Job ${JOB_NAME}"')
+		subject: sh('echo "${DEFAULT_SUBJECT}"')
 
 	}
 }
