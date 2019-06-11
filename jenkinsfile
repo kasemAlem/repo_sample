@@ -30,12 +30,4 @@ node {
 		}
 	}
 
-	stage('Post build') {
-		echo 'Always running this...'
-
-		emailext body: sh('echo "${DEFAULT_CONTENT}"'),
-		recipientProviders: [['kasem.alem@gmail.com']],
-		subject: sh('echo "${DEFAULT_SUBJECT}"')
-
-	}
 }
