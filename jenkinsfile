@@ -1,37 +1,33 @@
-pipeline{
-	agent any
+node {
 	def app
-	stages{
 
-		stage('CleanWorkspace') {
-			cleanWs()
-		}	
-
-		stage ("Clone the repo") {
-			checkout scm
-		}
-		environment {
-			NEW_TAG = sh(script: 'git tag -l | tail -n 1 | awk -F \'.\' \'{if ($3<9) {$3+=1} else {if ($2<9) {$3=0; $2+=1} else {$3=0;$2=0;$1+=1}}; printf "%s.%s.%s", $1, $2, $3}\'', returnStdout: true).trim()
-			NEW_NAME = sh(script: 'echo "myapp.${NEW_TAG}"', returnStdout: true).trim()
-		}
-		stage('Build image') {
-			/* This builds docker image from commandline*/ 
-			app = docker.build(sh(script: 'git tag -l | tail -n 1 | awk -F \'.\' \'{if ($3<9) {$3+=1} else {if ($2<9) {$3=0; $2+=1} else {$3=0;$2=0;$1+=1}}; printf "%s.%s.%s", $1, $2, $3}\'', returnStdout: true).trim())
-		}
-		stage('Test image') {
-			/*Testing app image*/
-			app.inside{
-				sh '/usr/local/bin/getJenkinsHistory.py' 
-			}
-		}
-		stage('Push new tag') {
-			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'faaf7389-3553-4fd7-bb57-f8bb68fd9bc6', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
-				sh("git config credential.username ${env.GIT_USERNAME}")
-				sh("git config credential.helper '!echo password=\$GIT_PASSWORD; echo'")
-				sh 'NEW_TAG=`git tag -l | tail -n 1 | awk -F \'.\' \'{if ($3<9) {$3+=1} else {if ($2<9) {$3=0; $2+=1} else {$3=0;$2=0;$1+=1}}; printf "%s.%s.%s", $1, $2, $3}\'`; git tag -a -f ${NEW_TAG} HEAD -m "${NEW_TAG}"; GIT_ASKPASS=true; git push origin --tags'
-			}
-		}
-	
+	stage('CleanWorkspace') {
+		cleanWs()
 	}
-}
 
+	stage ("Clone the repo") {
+		checkout scm
+	}
+	environment {
+		NEW_TAG = sh(script: 'git tag -l | tail -n 1 | awk -F \'.\' \'{if ($3<9) {$3+=1} else {if ($2<9) {$3=0; $2+=1} else {$3=0;$2=0;$1+=1}}; printf "%s.%s.%s", $1, $2, $3}\'', returnStdout: true).trim()
+		NEW_NAME = sh(script: 'echo "myapp.${NEW_TAG}"', returnStdout: true).trim()
+	}
+	stage('Build image') {
+		/* This builds docker image from commandline*/ 
+		app = docker.build(sh(script: 'git tag -l | tail -n 1 | awk -F \'.\' \'{if ($3<9) {$3+=1} else {if ($2<9) {$3=0; $2+=1} else {$3=0;$2=0;$1+=1}}; printf "%s.%s.%s", $1, $2, $3}\'', returnStdout: true).trim())
+	}
+	stage('Test image') {
+		/*Testing app image*/
+		app.inside{
+			sh '/usr/local/bin/getJenkinsHistory.py' 
+		}
+	}
+	stage('Push new tag') {
+		withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'faaf7389-3553-4fd7-bb57-f8bb68fd9bc6', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+			sh("git config credential.username ${env.GIT_USERNAME}")
+			sh("git config credential.helper '!echo password=\$GIT_PASSWORD; echo'")
+			sh 'NEW_TAG=`git tag -l | tail -n 1 | awk -F \'.\' \'{if ($3<9) {$3+=1} else {if ($2<9) {$3=0; $2+=1} else {$3=0;$2=0;$1+=1}}; printf "%s.%s.%s", $1, $2, $3}\'`; git tag -a -f ${NEW_TAG} HEAD -m "${NEW_TAG}"; GIT_ASKPASS=true; git push origin --tags'
+		}
+	}
+
+}
