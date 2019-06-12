@@ -7,7 +7,6 @@ from traceback import format_exc
 url_get_all_builds = "http://18.222.147.201:8080//job/{}/api/json?tree=allBuilds[*]&depth=2"
 version_base = "1.0.0"
 
-lf = open('/home/ec2-user/workspace/piplineJob/logfile.log', 'w')
 
 def get_server_instance():
 
@@ -24,6 +23,7 @@ def getSCMInfroFromLatestGoodBuild(url, jobName, tags, username=None, password=N
     last_build_tag = tags[-1]
 
     #new_tag = (int(''.join(last_build_tag.split('.'))) + 1)
+    lf = open('/home/ec2-user/workspace/piplineJob/logfile.log', 'w')
     if not last_build_number:
         return
     for i in range(last_build_number, 0, -1):
