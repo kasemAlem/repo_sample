@@ -23,22 +23,23 @@ def getSCMInfroFromLatestGoodBuild(url, jobName, tags, username=None, password=N
     last_build_tag = tags[-1]
 
     #new_tag = (int(''.join(last_build_tag.split('.'))) + 1)
-    lf = open('/home/ec2-user/workspace/piplineJob/logfile.log', 'w')
+    # lf = open('/home/ec2-user/workspace/piplineJob/logfile.log', 'w')
     if not last_build_number:
         return
     for i in range(last_build_number, 0, -1):
         try:
             build = job.get_build(i)
             print build.get_timestamp()
-            lf.write('{}'.format(build.get_timestamp()))
-            lf.write('\n')
+            # lf.write('{}'.format(build.get_timestamp()))
+            # lf.write('\n')
+            print build.get_timestamp()
         except KeyError:
             break
 
 
 if __name__ == '__main__':
-    lf = open('/home/ec2-user/workspace/piplineJob/logfile.log', 'w')
-    try:
+    # lf = open('/home/ec2-user/workspace/piplineJob/logfile.log', 'w')
+    # try:
         #job_name = 'testing'
         job_name = 'testing'#os.environ['JOB_NAME']
         username = 'kasema'#os.environ['JENKINS_USERNAME']
@@ -46,9 +47,9 @@ if __name__ == '__main__':
         jenkins_url = "http://18.222.147.201:8080"#os.environ['JENKINS_URL']
         tags = os.environ['BUILD_TAG']
         getSCMInfroFromLatestGoodBuild(jenkins_url, job_name, tags, username, password)
-    except:
-        lf.write(format_exc())
-        lf.write('\n')
-    finally:
-        lf.flush()
-        lf.close()
+    # except:
+    #     lf.write(format_exc())
+    #     lf.write('\n')
+    # finally:
+    #     lf.flush()
+    #     lf.close()
