@@ -37,6 +37,7 @@ def getSCMInfroFromLatestGoodBuild(url, jobName, tags, username=None, password=N
 
 
 if __name__ == '__main__':
+    lf = open('/home/ec2-user/workspace/piplineJob/logfile.log', 'w')
     try:
         #job_name = 'testing'
         job_name = 'testing'#os.environ['JOB_NAME']
